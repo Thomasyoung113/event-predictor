@@ -1,0 +1,42 @@
+name: predictor-loop
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: predictor-loop
+  cancel-in-progress: false
+
+jobs:
+  loop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Scan for dead strikes
+        run: python3 predictor.py scan
+
+      - name: Resolve matured trades
+        run: python3 predictor.py resolve
+
+      - name: Report
+        run: python3 predictor.py report
+
+      - name: Commit positions + log state
+        run: |
+          git config user.name "predictor-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add positions.json
+          git diff --cached --quiet && echo "no changes" || git commit -m "state: positions update [skip ci]"
+          git push
