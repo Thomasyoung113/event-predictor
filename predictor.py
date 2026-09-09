@@ -117,7 +117,11 @@ def atr_distance(m):
 
 
 def scan():
-    mkts = active_strike_markets()
+    try:
+        mkts = active_strike_markets()
+    except requests.RequestException as e:
+        print(f"scan aborted: market fetch failed: {e}")
+        return
     if not mkts:
         print("no strike markets in window")
         return
@@ -152,19 +156,30 @@ def resolve():
             continue
         if time.time() < p["end"] + 300:
             continue
-        r = requests.get(f"{GAMMA}/markets",
-                         params={"slug": p["slug"], "closed": "true"},
-                         headers=UA, timeout=20)
-        mk = r.json()
-        if not mk:
-            continue
+        try:
+            r = requests.get(f"{GAMMA}/markets",
+                             params={"slug": p["slug"], "closed": "true"},
+                             headers=UA, timeout=20)
+            r.raise_for_status()
+            mk = r.json()
+            if not isinstance(mk, list):
+                continue
+        except (requests.RequestException, ValueError):
+            continue  # keep unresolved; retried next cycle
         try:
             final = float(json.loads(mk[0]["outcomePrices"])[0])
         except (KeyError, ValueError, IndexError):
             continue
+        # Only settle on definitive outcomes. closed-but-UMA-pending markets
+        # report ["0.5","0.5"] — settling those would guess, not resolve.
+        status = (mk[0].get("umaResolutionStatus") or "").lower()
+        if status and status != "resolved":
+            continue
+        if abs(final - 1.0) > 0.01 and abs(final - 0.0) > 0.01:
+            continue  # ambiguous price — retry next cycle
         # NO wins if YES lost
-        p["yes_won"] = final == 1.0
-        p["payout"] = p["shares"] * 1.0 if not p["yes_won"] else 0.0
+        p["yes_won"] = final > 0.99
+        p["payout"] = p["shares"] * (1.0 - FEE) if not p["yes_won"] else 0.0
         p["pnl"] = p["payout"] - p["stake"]
         p["resolved"] = True
         print(f"resolved {p['slug'][:50]} yes={p['yes_won']} pnl={p['pnl']:+.2f}")
@@ -187,16 +202,34 @@ def report():
 
 def load(path):
     if os.path.exists(path):
-        with open(path) as f:
-            return json.load(f)
+        try:
+            with open(path) as f:
+                data = json.load(f)
+            if isinstance(data, list):
+                return data
+        except (ValueError, OSError):
+            pass  # corrupt file -> fall through to backup/restart
+        bak = path + ".corrupt"
+        try:
+            os.replace(path, bak)
+            print(f"WARNING: corrupt {path}, moved to {bak}, starting fresh")
+        except OSError:
+            pass
     return []
 
 
 def save(path, data):
-    with open(path, "w") as f:
+    tmp = path + ".tmp"
+    with open(tmp, "w") as f:
         json.dump(data, f, indent=1)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, path)  # atomic: never leaves a half-written file
 
 
 if __name__ == "__main__":
+    cmds = {"scan": scan, "resolve": resolve, "report": report}
     cmd = sys.argv[1] if len(sys.argv) > 1 else "scan"
-    {"scan": scan, "resolve": resolve, "report": report}.get(cmd, scan)()
+    if cmd not in cmds:
+        sys.exit(f"unknown command: {cmd!r} (use: scan|resolve|report)")
+    cmds[cmd]()

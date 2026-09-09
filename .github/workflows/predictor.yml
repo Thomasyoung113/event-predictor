@@ -28,15 +28,19 @@ jobs:
         run: python3 predictor.py scan
 
       - name: Resolve matured trades
+        if: always()
         run: python3 predictor.py resolve
 
       - name: Report
+        if: always()
         run: python3 predictor.py report
 
       - name: Commit positions + log state
+        if: always()
         run: |
           git config user.name "predictor-bot"
           git config user.email "actions@users.noreply.github.com"
           git add positions.json
           git diff --cached --quiet && echo "no changes" || git commit -m "state: positions update [skip ci]"
+          git pull --rebase origin main
           git push

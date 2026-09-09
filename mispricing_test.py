@@ -12,7 +12,7 @@ total = [m for m in json.load(open("archive.json")) if isinstance(m, dict)]
 rows = []
 for m in total:
     s = m.get("slug", "") or ""
-    mm = re.match(r"(bitcoin|ethereum)-above-([\d.]+)-on-(.+?)-(\d+)(am|pm)-et", s)
+    mm = re.match(r"(bitcoin|ethereum)-above-([\d,.]+)-on-(.+?)-(\d+)(am|pm)-et", s)
     if not mm or not m.get("endDate"):
         continue
     try:
@@ -23,7 +23,7 @@ for m in total:
     if not toks:
         continue
     rows.append({
-        "coin": mm.group(1), "strike": float(mm.group(2)),
+        "coin": mm.group(1), "strike": float(mm.group(2).replace(",", "")),
         "yes_won": final == 1.0,
         "end": datetime.datetime.fromisoformat(
             m["endDate"].replace("Z", "+00:00")).timestamp(),
@@ -114,7 +114,9 @@ for b, (n, sp, w) in sorted(buck.items()):
     if n < 10:
         continue
     imp, hit = sp / n, w / n
-    ev = (imp - hit) - 0.02  # sell YES at implied, lose hit_rate, minus fees
+    # strategy: SELL YES at implied price -> keep (1-imp) per unit, lose hit
+    # fraction of the time (payout 1). EV = (1-imp) - hit - fees.
+    ev = (1 - imp) - hit - 0.02
     print(f"{b:>10} {n:>5} {imp:>8.4f} {hit:>9.4f} {imp-hit:>+8.4f} {ev:>+8.4f}")
 
 json.dump({b: [n, sp, w] for b, (n, sp, w) in buck.items()},
