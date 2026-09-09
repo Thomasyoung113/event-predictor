@@ -152,7 +152,8 @@ def resolve():
             continue
         if time.time() < p["end"] + 300:
             continue
-        r = requests.get(f"{GAMMA}/markets", params={"slug": p["slug"]},
+        r = requests.get(f"{GAMMA}/markets",
+                         params={"slug": p["slug"], "closed": "true"},
                          headers=UA, timeout=20)
         mk = r.json()
         if not mk:
