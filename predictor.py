@@ -2,7 +2,7 @@
 
 Scans active hourly crypto strike markets (bitcoin/ethereum-above/below-N).
 At each scan: compute spot distance from strike in ATR units using 15m
-candles. Signals NO on strikes > threshold ATR from spot. Paper-trades:
+candles. Sells YES on dead strikes (bid < 1 - FEE). Paper-trades:
 logs entries, resolves at market close, tracks P&L.
 
 Usage:
@@ -20,9 +20,9 @@ CLOB = "https://clob.polymarket.com"
 KRAKEN = "https://api.kraken.com/0/public"
 UA = {"User-Agent": "Mozilla/5.0"}
 
-THRESH = 1.0     # ATR distance beyond which strike is "dead" -> NO
+THRESH = 1.0     # ATR distance beyond which strike is "dead" -> sell YES
 T_MIN = 20       # scan window: markets closing in 20-40 min
-STAKE = 10.0     # USD per NO share buy (paper)
+STAKE = 10.0     # USD collateral per SELL_YES position (paper)
 FEE = 0.02       # est. cost/slippage per share (2c)
 
 SLUG = re.compile(r"(bitcoin|ethereum|solana|xrp)-(above|below)-([\d.]+)-on-")
@@ -153,17 +153,7 @@ def scan():
             continue
         spot, atr, dist = d
         if dist > THRESH:
-            # strike far from spot -> market effectively dead -> buy NO
-            # NO price ~ 1 - YES ask; approximate entry at 0.98 conservative
-            entry = 0.98
-            positions.append({
-                "slug": m["slug"], "ts": int(time.time()), "end": m["end"],
-                "coin": m["coin"], "dir": m["dir"], "strike": m["strike"],
-                "spot": spot, "atr": round(atr, 2), "dist": round(dist, 2),
-                "side": "NO", "entry": entry, "stake": STAKE,
-                "shares": STAKE / entry, "resolved": False})
-            print(f"NO  {m['slug'][:55]} dist={dist:+.1f} ATR spot={spot}")
-            # --- parallel paper line: SELL YES on the same dead strike ---
+            # strike far from spot -> market effectively dead -> sell YES
             # profit = bid received per share; loss = (1 - bid) if YES wins
             clob_id = (m.get("clob") or [""])[0]
             bid = yes_bid(clob_id) if clob_id else None
@@ -210,43 +200,37 @@ def resolve():
             continue
         if abs(final - 1.0) > 0.01 and abs(final - 0.0) > 0.01:
             continue  # ambiguous price — retry next cycle
-        # NO wins if YES lost
+        # YES wins/loses decides the SELL_YES settlement
         p["yes_won"] = final > 0.99
-        if p.get("side") == "SELL_YES":
-            # sold YES at `entry`: keep entry/share if YES loses,
-            # pay (1 - entry) per share if YES wins
-            p["payout"] = p["shares"] * p["entry"] if not p["yes_won"] \
-                else 0.0
-            p["liability"] = p["shares"] * (1.0 - p["entry"]) \
-                if p["yes_won"] else 0.0
-            p["pnl"] = p["payout"] - p["liability"]
-        else:
-            p["payout"] = p["shares"] * (1.0 - FEE) if not p["yes_won"] else 0.0
-            p["pnl"] = p["payout"] - p["stake"]
+        # sold YES at `entry`: keep entry/share if YES loses,
+        # pay (1 - entry) per share if YES wins
+        p["payout"] = p["shares"] * p["entry"] if not p["yes_won"] else 0.0
+        p["liability"] = p["shares"] * (1.0 - p["entry"]) \
+            if p["yes_won"] else 0.0
+        p["pnl"] = p["payout"] - p["liability"]
         p["resolved"] = True
-        print(f"resolved {p['slug'][:50]} side={p.get('side', 'NO')} "
+        print(f"resolved {p['slug'][:50]} side=SELL_YES "
               f"yes={p['yes_won']} pnl={p['pnl']:+.2f}")
     save(POS, positions)
 
 
 def report():
     positions = load(POS)
-    for side in ("NO", "SELL_YES"):
-        done = [p for p in positions
-                if p.get("resolved") and p.get("side", "NO") == side]
-        open_ = [p for p in positions
-                 if not p.get("resolved") and p.get("side", "NO") == side]
-        wins = sum(1 for p in done if p["pnl"] > 0)
-        pnl = sum(p["pnl"] for p in done)
-        print(f"== {side} == open: {len(open_)} | resolved: {len(done)} "
-              f"| wins: {wins}")
-        if done:
-            staked = sum(p["stake"] for p in done)
-            print(f"P&L: ${pnl:+.2f} on ${staked:.0f} "
-                  f"({wins}/{len(done)} = {wins/len(done):.0%})")
-        for p in open_:
-            print(f"  open {p['slug'][:50]} dist={p['dist']} "
-                  f"entry={p['entry']}")
+    done = [p for p in positions
+            if p.get("resolved") and p.get("side") == "SELL_YES"]
+    open_ = [p for p in positions
+             if not p.get("resolved") and p.get("side") == "SELL_YES"]
+    wins = sum(1 for p in done if p["pnl"] > 0)
+    pnl = sum(p["pnl"] for p in done)
+    print(f"== SELL_YES == open: {len(open_)} | resolved: {len(done)} "
+          f"| wins: {wins}")
+    if done:
+        staked = sum(p["stake"] for p in done)
+        print(f"P&L: ${pnl:+.2f} on ${staked:.0f} "
+              f"({wins}/{len(done)} = {wins/len(done):.0%})")
+    for p in open_:
+        print(f"  open {p['slug'][:50]} dist={p['dist']} "
+              f"entry={p['entry']}")
 
 
 def load(path):
