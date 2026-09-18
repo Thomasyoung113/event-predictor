@@ -20980,5 +20980,53 @@
   "payout": 0.2,
   "liability": 0.0,
   "pnl": 0.2
+ },
+ {
+  "slug": "ethereum-above-2700-on-september-18-2026",
+  "ts": 1789744069,
+  "end": 1789747200.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2700.0,
+  "spot": 2582.3,
+  "atr": 47.54,
+  "dist": 2.48,
+  "side": "SELL_YES",
+  "entry": 0.005,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2800-on-september-18-2026",
+  "ts": 1789744069,
+  "end": 1789747200.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2800.0,
+  "spot": 2582.3,
+  "atr": 47.54,
+  "dist": 4.58,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "solana-above-115-on-september-18-2026",
+  "ts": 1789744071,
+  "end": 1789747200.0,
+  "coin": "solana",
+  "dir": "above",
+  "strike": 115.0,
+  "spot": 110.02,
+  "atr": 1.87,
+  "dist": 2.66,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
  }
 ]
