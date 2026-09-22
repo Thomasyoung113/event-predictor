@@ -25103,6 +25103,10 @@
   "entry": 0.05,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.5,
+  "liability": 0.0,
+  "pnl": 0.5
  }
 ]
