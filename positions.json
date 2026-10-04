@@ -39543,7 +39543,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "bitcoin-above-87200-on-october-4-2026-2pm-et",
@@ -39559,7 +39563,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "bitcoin-above-87000-on-october-4-2026-2pm-et",
@@ -39575,7 +39583,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "bitcoin-above-86800-on-october-4-2026-2pm-et",
@@ -39591,7 +39603,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "bitcoin-above-86600-on-october-4-2026-2pm-et",
@@ -39607,7 +39623,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "bitcoin-above-86400-on-october-4-2026-2pm-et",
@@ -39623,7 +39643,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "bitcoin-above-86200-on-october-4-2026-2pm-et",
@@ -39639,7 +39663,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "bitcoin-above-86000-on-october-4-2026-2pm-et",
@@ -39655,7 +39683,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "bitcoin-above-85800-on-october-4-2026-2pm-et",
@@ -39671,7 +39703,11 @@
   "entry": 0.94,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.399999999999999,
+  "liability": 0.0,
+  "pnl": 9.399999999999999
  },
  {
   "slug": "bitcoin-above-85600-on-october-4-2026-2pm-et",
@@ -39687,7 +39723,11 @@
   "entry": 0.01,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.1,
+  "liability": 0.0,
+  "pnl": 0.1
  },
  {
   "slug": "ethereum-above-2780-on-october-4-2026-2pm-et",
@@ -39703,7 +39743,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "ethereum-above-2770-on-october-4-2026-2pm-et",
@@ -39719,7 +39763,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "ethereum-above-2760-on-october-4-2026-2pm-et",
@@ -39735,7 +39783,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "ethereum-above-2750-on-october-4-2026-2pm-et",
@@ -39751,7 +39803,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "ethereum-above-2740-on-october-4-2026-2pm-et",
@@ -39767,7 +39823,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "ethereum-above-2730-on-october-4-2026-2pm-et",
@@ -39783,7 +39843,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "ethereum-above-2720-on-october-4-2026-2pm-et",
@@ -39799,7 +39863,11 @@
   "entry": 0.94,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.399999999999999,
+  "liability": 0.0,
+  "pnl": 9.399999999999999
  },
  {
   "slug": "ethereum-above-2710-on-october-4-2026-2pm-et",
@@ -39813,6 +39881,266 @@
   "dist": 1.18,
   "side": "SELL_YES",
   "entry": 0.05,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.5,
+  "liability": 0.0,
+  "pnl": 0.5
+ },
+ {
+  "slug": "bitcoin-above-87000-on-october-4-2026-5pm-et",
+  "ts": 1791144891,
+  "end": 1791147600.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 87000.0,
+  "spot": 85422.3,
+  "atr": 171.8,
+  "dist": 9.18,
+  "side": "SELL_YES",
+  "entry": 0.955,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "bitcoin-above-86800-on-october-4-2026-5pm-et",
+  "ts": 1791144891,
+  "end": 1791147600.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 86800.0,
+  "spot": 85422.3,
+  "atr": 171.8,
+  "dist": 8.02,
+  "side": "SELL_YES",
+  "entry": 0.955,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "bitcoin-above-86600-on-october-4-2026-5pm-et",
+  "ts": 1791144891,
+  "end": 1791147600.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 86600.0,
+  "spot": 85422.3,
+  "atr": 171.8,
+  "dist": 6.86,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "bitcoin-above-86400-on-october-4-2026-5pm-et",
+  "ts": 1791144892,
+  "end": 1791147600.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 86400.0,
+  "spot": 85422.3,
+  "atr": 171.8,
+  "dist": 5.69,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "bitcoin-above-86200-on-october-4-2026-5pm-et",
+  "ts": 1791144892,
+  "end": 1791147600.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 86200.0,
+  "spot": 85422.9,
+  "atr": 171.8,
+  "dist": 4.52,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "bitcoin-above-86000-on-october-4-2026-5pm-et",
+  "ts": 1791144892,
+  "end": 1791147600.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 86000.0,
+  "spot": 85422.9,
+  "atr": 171.8,
+  "dist": 3.36,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "bitcoin-above-85800-on-october-4-2026-5pm-et",
+  "ts": 1791144892,
+  "end": 1791147600.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 85800.0,
+  "spot": 85422.9,
+  "atr": 171.8,
+  "dist": 2.19,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "bitcoin-above-85600-on-october-4-2026-5pm-et",
+  "ts": 1791144893,
+  "end": 1791147600.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 85600.0,
+  "spot": 85422.9,
+  "atr": 171.8,
+  "dist": 1.03,
+  "side": "SELL_YES",
+  "entry": 0.01,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2780-on-october-4-2026-5pm-et",
+  "ts": 1791144894,
+  "end": 1791147600.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2780.0,
+  "spot": 2700.37,
+  "atr": 3.71,
+  "dist": 21.46,
+  "side": "SELL_YES",
+  "entry": 0.955,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2770-on-october-4-2026-5pm-et",
+  "ts": 1791144894,
+  "end": 1791147600.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2770.0,
+  "spot": 2700.37,
+  "atr": 3.71,
+  "dist": 18.77,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2760-on-october-4-2026-5pm-et",
+  "ts": 1791144894,
+  "end": 1791147600.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2760.0,
+  "spot": 2700.37,
+  "atr": 3.71,
+  "dist": 16.07,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2750-on-october-4-2026-5pm-et",
+  "ts": 1791144895,
+  "end": 1791147600.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2750.0,
+  "spot": 2700.37,
+  "atr": 3.71,
+  "dist": 13.38,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2740-on-october-4-2026-5pm-et",
+  "ts": 1791144895,
+  "end": 1791147600.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2740.0,
+  "spot": 2700.37,
+  "atr": 3.71,
+  "dist": 10.68,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2730-on-october-4-2026-5pm-et",
+  "ts": 1791144895,
+  "end": 1791147600.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2730.0,
+  "spot": 2700.37,
+  "atr": 3.71,
+  "dist": 7.99,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2720-on-october-4-2026-5pm-et",
+  "ts": 1791144895,
+  "end": 1791147600.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2720.0,
+  "spot": 2700.37,
+  "atr": 3.71,
+  "dist": 5.29,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "ethereum-above-2710-on-october-4-2026-5pm-et",
+  "ts": 1791144896,
+  "end": 1791147600.0,
+  "coin": "ethereum",
+  "dir": "above",
+  "strike": 2710.0,
+  "spot": 2700.37,
+  "atr": 3.71,
+  "dist": 2.6,
+  "side": "SELL_YES",
+  "entry": 0.002,
   "stake": 10.0,
   "shares": 10.0,
   "resolved": false
