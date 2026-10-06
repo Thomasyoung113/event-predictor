@@ -48,6 +48,72 @@ SYM = {"bitcoin": "XBTUSD", "ethereum": "ETHUSD", "solana": "SOLUSD",
        "xrp": "XRPUSD"}
 
 
+def active_5m_markets():
+    now = time.time()
+    min_iso = datetime.datetime.fromtimestamp(now - 300, datetime.UTC).isoformat().replace("+00:00", "Z")
+    max_iso = datetime.datetime.fromtimestamp(now + 1800, datetime.UTC).isoformat().replace("+00:00", "Z")
+    try:
+        r = requests.get(f"{GAMMA}/events", params={
+            "active": "true", "closed": "false", "limit": 20,
+            "end_date_min": min_iso, "end_date_max": max_iso,
+            "order": "endDate", "ascending": "true"},
+            headers=UA, timeout=15)
+        evs = [e for e in r.json() if isinstance(e, dict)]
+        out = []
+        for e in evs:
+            eslug = e.get("slug", "") or ""
+            if "btc-updown-5m" not in eslug:
+                continue
+            mkts = e.get("markets") or []
+            if not mkts:
+                continue
+            m = mkts[0]
+            try:
+                end = datetime.datetime.fromisoformat(e["endDate"].replace("Z", "+00:00")).timestamp()
+            except (KeyError, ValueError):
+                continue
+            clob_tokens = json.loads(m.get("clobTokenIds") or "[]")
+            if len(clob_tokens) >= 2:
+                out.append({
+                    "slug": m.get("slug") or eslug,
+                    "event": eslug,
+                    "title": e.get("title") or m.get("question"),
+                    "end": end,
+                    "up_token": clob_tokens[0],
+                    "down_token": clob_tokens[1]
+                })
+        return out
+    except Exception as e:
+        print(f"5m markets fetch failed: {e}")
+        return []
+
+
+def btc_spot_price():
+    try:
+        r = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
+                         headers=UA, timeout=5)
+        return float(r.json()["bitcoin"]["usd"])
+    except Exception:
+        pass
+    try:
+        r = requests.get("https://api.mexc.com/api/v3/ticker/price?symbol=BTCUSDT", timeout=5)
+        return float(r.json()["price"])
+    except Exception:
+        return None
+
+
+def clob_best_ask(token_id):
+    try:
+        r = requests.get(f"{CLOB}/book", params={"token_id": token_id}, headers=UA, timeout=5)
+        b = r.json()
+        asks = b.get("asks") or []
+        if asks:
+            return min(float(a["price"]) for a in asks)
+    except Exception:
+        pass
+    return None
+
+
 def active_strike_markets():
     """Live strike markets from hourly events (events endpoint, end_date_min
     filters stale junk). Window: closing in 10-60min."""
@@ -135,16 +201,94 @@ def atr_distance(m):
     return spot, atr, dist
 
 
+def scan_5m(positions):
+    mkts = active_5m_markets()
+    if not mkts:
+        return
+    spot = btc_spot_price()
+    if not spot:
+        return
+    now = time.time()
+    existing = {p.get("slug") for p in positions if not p.get("resolved")}
+    for m in mkts:
+        if m["slug"] in existing:
+            continue
+        time_left = m["end"] - now
+        if not (45 <= time_left <= 270):
+            continue
+        up_ask = clob_best_ask(m["up_token"])
+        down_ask = clob_best_ask(m["down_token"])
+        if up_ask and 0.25 <= up_ask <= 0.60:
+            shares = round(STAKE / up_ask, 2)
+            positions.append({
+                "slug": m["slug"], "event": m["event"], "title": m["title"],
+                "coin": "bitcoin", "timeframe": "5m", "side": "UP",
+                "ts": int(now), "end": int(m["end"]), "spot": spot,
+                "entry": round(up_ask, 3), "stake": STAKE,
+                "shares": shares, "resolved": False
+            })
+            print(f"5M+ {m['slug']} UP @ {up_ask:.3f} spot={spot:.1f}")
+        elif down_ask and 0.25 <= down_ask <= 0.60:
+            shares = round(STAKE / down_ask, 2)
+            positions.append({
+                "slug": m["slug"], "event": m["event"], "title": m["title"],
+                "coin": "bitcoin", "timeframe": "5m", "side": "DOWN",
+                "ts": int(now), "end": int(m["end"]), "spot": spot,
+                "entry": round(down_ask, 3), "stake": STAKE,
+                "shares": shares, "resolved": False
+            })
+            print(f"5M+ {m['slug']} DOWN @ {down_ask:.3f} spot={spot:.1f}")
+
+
+def resolve_5m(positions):
+    now = time.time()
+    for p in positions:
+        if p.get("resolved") or p.get("timeframe") != "5m":
+            continue
+        if now < p.get("end", 0) + 15:
+            continue
+        try:
+            r = requests.get(f"{GAMMA}/events", params={"slug": p.get("event")}, headers=UA, timeout=10)
+            evs = r.json()
+            if not isinstance(evs, list) or not evs:
+                continue
+            mkts = evs[0].get("markets") or []
+            if not mkts:
+                continue
+            prices = json.loads(mkts[0].get("outcomePrices") or "[]")
+            if len(prices) >= 2:
+                up_px = float(prices[0])
+                down_px = float(prices[1])
+                won = None
+                if up_px >= 0.95:
+                    won = (p["side"] == "UP")
+                elif down_px >= 0.95:
+                    won = (p["side"] == "DOWN")
+                if won is not None:
+                    p["resolved"] = True
+                    p["won"] = won
+                    if won:
+                        p["pnl"] = round(p["shares"] * (1.0 - p["entry"]) - 0.02 * p["stake"], 2)
+                    else:
+                        p["pnl"] = -p["stake"]
+                    print(f"resolved 5m {p['slug']} {p['side']} won={won} pnl={p['pnl']:+.2f}")
+        except Exception:
+            continue
+
+
 def scan():
+    positions = load(POS)
+    scan_5m(positions)
     try:
         mkts = active_strike_markets()
     except requests.RequestException as e:
         print(f"scan aborted: market fetch failed: {e}")
+        save(POS, positions)
         return
     if not mkts:
         print("no strike markets in window")
+        save(POS, positions)
         return
-    positions = load(POS)
     for m in mkts:
         if m["slug"] in {p["slug"] for p in positions if not p.get("resolved")}:
             continue
@@ -153,8 +297,6 @@ def scan():
             continue
         spot, atr, dist = d
         if dist > THRESH:
-            # strike far from spot -> market effectively dead -> sell YES
-            # profit = bid received per share; loss = (1 - bid) if YES wins
             clob_id = (m.get("clob") or [""])[0]
             bid = yes_bid(clob_id) if clob_id else None
             if bid and bid < 1.0 - FEE:
@@ -163,8 +305,8 @@ def scan():
                     "coin": m["coin"], "dir": m["dir"], "strike": m["strike"],
                     "spot": spot, "atr": round(atr, 2), "dist": round(dist, 2),
                     "side": "SELL_YES", "entry": round(bid, 3),
-                    "stake": STAKE,  # collateral notionally at risk
-                    "shares": STAKE,  # 1:1: selling $10 worth of YES shares
+                    "stake": STAKE,
+                    "shares": STAKE,
                     "resolved": False})
                 print(f"SY+ {m['slug'][:55]} dist={dist:+.1f} bid={bid:.3f}")
         elif dist < -THRESH:
@@ -174,6 +316,7 @@ def scan():
 
 def resolve():
     positions = load(POS)
+    resolve_5m(positions)
     for p in positions:
         if p["resolved"]:
             continue
