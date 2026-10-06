@@ -42128,5 +42128,37 @@
   "payout": 0.01,
   "liability": 0.0,
   "pnl": 0.01
+ },
+ {
+  "slug": "bitcoin-above-87600-on-october-6-2026-8pm-et",
+  "ts": 1791327998,
+  "end": 1791331200.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 87600.0,
+  "spot": 85486.4,
+  "atr": 128.7,
+  "dist": 16.42,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
+ },
+ {
+  "slug": "bitcoin-above-87400-on-october-6-2026-8pm-et",
+  "ts": 1791327998,
+  "end": 1791331200.0,
+  "coin": "bitcoin",
+  "dir": "above",
+  "strike": 87400.0,
+  "spot": 85486.4,
+  "atr": 128.7,
+  "dist": 14.87,
+  "side": "SELL_YES",
+  "entry": 0.001,
+  "stake": 10.0,
+  "shares": 10.0,
+  "resolved": false
  }
 ]
