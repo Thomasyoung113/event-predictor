@@ -44120,7 +44120,11 @@
   "entry": 0.001,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.01,
+  "liability": 0.0,
+  "pnl": 0.01
  },
  {
   "slug": "bitcoin-above-82800-on-october-8-2026-9pm-et",
@@ -44136,7 +44140,11 @@
   "entry": 0.001,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.01,
+  "liability": 0.0,
+  "pnl": 0.01
  },
  {
   "slug": "bitcoin-above-82600-on-october-8-2026-9pm-et",
@@ -44152,7 +44160,11 @@
   "entry": 0.001,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.01,
+  "liability": 0.0,
+  "pnl": 0.01
  },
  {
   "slug": "bitcoin-above-82400-on-october-8-2026-9pm-et",
@@ -44168,7 +44180,11 @@
   "entry": 0.001,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.01,
+  "liability": 0.0,
+  "pnl": 0.01
  },
  {
   "slug": "bitcoin-above-82200-on-october-8-2026-9pm-et",
@@ -44184,7 +44200,11 @@
   "entry": 0.001,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.01,
+  "liability": 0.0,
+  "pnl": 0.01
  },
  {
   "slug": "bitcoin-above-82000-on-october-8-2026-9pm-et",
@@ -44200,7 +44220,11 @@
   "entry": 0.03,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.3,
+  "liability": 0.0,
+  "pnl": 0.3
  },
  {
   "slug": "ethereum-above-2520-on-october-8-2026-9pm-et",
@@ -44216,7 +44240,11 @@
   "entry": 0.001,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.01,
+  "liability": 0.0,
+  "pnl": 0.01
  },
  {
   "slug": "ethereum-above-2510-on-october-8-2026-9pm-et",
@@ -44232,7 +44260,11 @@
   "entry": 0.001,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.01,
+  "liability": 0.0,
+  "pnl": 0.01
  },
  {
   "slug": "ethereum-above-2500-on-october-8-2026-9pm-et",
@@ -44248,7 +44280,11 @@
   "entry": 0.001,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.01,
+  "liability": 0.0,
+  "pnl": 0.01
  },
  {
   "slug": "ethereum-above-2490-on-october-8-2026-9pm-et",
@@ -44264,6 +44300,10 @@
   "entry": 0.01,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.1,
+  "liability": 0.0,
+  "pnl": 0.1
  }
 ]
