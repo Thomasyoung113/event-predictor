@@ -47994,7 +47994,11 @@
   "entry": 0.02,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.2,
+  "liability": 0.0,
+  "pnl": 0.2
  },
  {
   "slug": "bitcoin-above-83600-on-october-13-2026-2pm-et",
@@ -48010,7 +48014,11 @@
   "entry": 0.11,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 1.1,
+  "liability": 0.0,
+  "pnl": 1.1
  },
  {
   "slug": "ethereum-above-2550-on-october-13-2026-2pm-et",
@@ -48026,7 +48034,11 @@
   "entry": 0.96,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.6,
+  "liability": 0.0,
+  "pnl": 9.6
  },
  {
   "slug": "ethereum-above-2540-on-october-13-2026-2pm-et",
@@ -48042,7 +48054,11 @@
   "entry": 0.95,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.5,
+  "liability": 0.0,
+  "pnl": 9.5
  },
  {
   "slug": "ethereum-above-2530-on-october-13-2026-2pm-et",
@@ -48058,6 +48074,10 @@
   "entry": 0.93,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 9.3,
+  "liability": 0.0,
+  "pnl": 9.3
  }
 ]
