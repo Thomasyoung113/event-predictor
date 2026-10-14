@@ -49036,5 +49036,20 @@
   "payout": 0.3,
   "liability": 0.0,
   "pnl": 0.3
+ },
+ {
+  "slug": "btc-updown-5m-1792021800",
+  "event": "btc-updown-5m-1792021800",
+  "title": "Bitcoin Up or Down - October 14, 7:50PM-7:55PM ET",
+  "coin": "bitcoin",
+  "timeframe": "5m",
+  "side": "UP",
+  "ts": 1792021884,
+  "end": 1792022100,
+  "spot": 81581.0,
+  "entry": 0.58,
+  "stake": 10.0,
+  "shares": 17.24,
+  "resolved": false
  }
 ]
