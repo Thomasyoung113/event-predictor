@@ -49288,7 +49288,11 @@
   "entry": 0.01,
   "stake": 10.0,
   "shares": 10.0,
-  "resolved": false
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.1,
+  "liability": 0.0,
+  "pnl": 0.1
  },
  {
   "slug": "ethereum-above-2420-on-october-15-2026-11am-et",
@@ -49304,6 +49308,25 @@
   "entry": 0.01,
   "stake": 10.0,
   "shares": 10.0,
+  "resolved": true,
+  "yes_won": false,
+  "payout": 0.1,
+  "liability": 0.0,
+  "pnl": 0.1
+ },
+ {
+  "slug": "btc-updown-5m-1792088400",
+  "event": "btc-updown-5m-1792088400",
+  "title": "Bitcoin Up or Down - October 15, 2:20PM-2:25PM ET",
+  "coin": "bitcoin",
+  "timeframe": "5m",
+  "side": "UP",
+  "ts": 1792088590,
+  "end": 1792088700,
+  "spot": 82036.0,
+  "entry": 0.51,
+  "stake": 10.0,
+  "shares": 19.61,
   "resolved": false
  }
 ]
