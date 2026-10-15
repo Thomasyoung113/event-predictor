@@ -49050,6 +49050,8 @@
   "entry": 0.58,
   "stake": 10.0,
   "shares": 17.24,
-  "resolved": false
+  "resolved": true,
+  "won": false,
+  "pnl": -10.0
  }
 ]
